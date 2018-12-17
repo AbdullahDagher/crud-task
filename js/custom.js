@@ -1,6 +1,22 @@
 $(document).ready(function () {
    'use strict';
 
+    function getAllData() {
+        $.ajax({
+            url: 'getAllData.php',
+            dataType: 'text',
+            success: function (data) {
+                $('tbody').html(data);
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+                console.log(JSON.parse(xhr.responseText));
+                console.log(xhr);
+            }
+        });
+    }
+    getAllData();
+
     $(document).on('click', '.delete', function () {
         var id = $(this).data('id'),
             popup = $('#delete-popup');
@@ -34,7 +50,7 @@ $(document).ready(function () {
                 console.log(JSON.parse(xhr.responseText));
                 console.log(xhr);
             }
-        })
+        });
         popup.find('#update').attr('data-update-id', id);
         popup.fadeIn();
         popup.find('.popup-content').addClass('popup-animate');
@@ -46,7 +62,7 @@ $(document).ready(function () {
             bookName = popup.find('#book-name').val(),
             authorName = popup.find('#author-name').val();
         if(bookName != '' && authorName != ''){
-            $('#message').html('');
+            $('#update-message').html('');
             $.ajax({
                 url: 'updateBook.php',
                 method: 'POST',
@@ -94,25 +110,9 @@ $(document).ready(function () {
     });
 
 
-   function getAllData() {
-       $.ajax({
-           url: 'getAllData.php',
-           dataType: 'text',
-           success: function (data) {
-               $('tbody').html(data);
-           },
-           error: function (xhr, status, error) {
-               console.log(error);
-               console.log(JSON.parse(xhr.responseText));
-               console.log(xhr);
-           }
-       });
-   }
-   getAllData();
-
    $(document).on('click', '#add', function () {
-       var bookName = $('#book-name').val(),
-           authorName = $('#author-name').val();
+        var bookName = $('#book-name').val(),
+            authorName = $('#author-name').val();
         if(bookName != '' && authorName != ''){
             $('#message').html('');
             $.ajax({
