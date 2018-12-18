@@ -10,6 +10,17 @@ input{
     outline: none;
 }
 
+#search-input{
+    width: 200px;
+    border: 1px solid #000;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+#search-input+button{
+    margin-bottom: 4px;
+}
+
 .popup{
     position: fixed;
     top: 0;

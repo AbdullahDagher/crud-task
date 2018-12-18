@@ -17,6 +17,24 @@ $(document).ready(function () {
     }
     getAllData();
 
+    $('#search-button').on('click', function () {
+        var bookName = $('#search-input').val();
+        if(bookName !=''){
+            $.ajax({
+               url: 'search.php',
+                method: 'POST',
+                data: {
+                   bookName: bookName
+                },
+                dataType: 'text',
+                success: function (data) {
+                    $('tbody').html(data);
+                }
+            });
+        }
+    });
+
+
     $(document).on('click', '.delete', function () {
         var id = $(this).data('id'),
             popup = $('#delete-popup');
